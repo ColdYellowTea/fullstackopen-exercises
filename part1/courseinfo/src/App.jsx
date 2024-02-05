@@ -7,23 +7,30 @@ const Header = (props) => {
   )
 }
 
+
+const Part = (props) => {
+  console.log("Part:")
+  console.log(props)
+  return(
+    <p>
+        {props.content.part} {props.content.exercises}
+      </p>
+    )
+}
+
+
 const Content = (props) => {
   console.log("Content:")
   console.log(props)
   return(
     <>
-      <p>
-        {props.content[0].part} {props.content[0].exercises}
-      </p>
-      <p>
-        {props.content[1].part} {props.content[1].exercises}
-      </p>
-      <p>
-        {props.content[2].part} {props.content[2].exercises}
-      </p>
+     <Part content={props.content[0]} />
+     <Part content={props.content[1]} />
+     <Part content={props.content[2]} />
     </>
   )
 }
+
 
 const Total = (props) => {
   console.log("Total:")
@@ -32,6 +39,7 @@ const Total = (props) => {
     <p>Number of exercises {props.exercises}</p>
   )
 }
+
 
 const App = () => {
   const course = 'Half Stack application development'
