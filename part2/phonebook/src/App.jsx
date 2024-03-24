@@ -4,6 +4,7 @@ import Filter from './components/Filter'
 import PersonForm from './components/PersonForm'
 import Persons from './components/Persons'
 import personService from './services/persons'
+import Message from './components/Message'
 
 const App = () => {
   const [persons, setPersons] = useState([]) 
@@ -11,7 +12,7 @@ const App = () => {
   const [newNumber, setNewNumber] = useState('')
   const [newFilter, setNewFilter] = useState('')
   const showAll = false
-  
+  const [message,setMessage] = useState('')
   useEffect(() => {
     console.log('effect')
     personService
@@ -42,7 +43,24 @@ const App = () => {
           personService
           .update(search.id, personObject)
           .then(person => {
-            setPersons(persons.map(p => p.id !== search.id ? p : person))})
+            setPersons(persons.map(p => p.id !== search.id ? p : person))
+            setMessage(
+              `${newName}'s number has been updated`
+            )
+            setTimeout(() => {
+              setMessage(null)
+            }, 5000)
+            setNewName('')
+            setNewNumber('')
+          })
+          .catch(error => {
+            setMessage(
+              `${newName}'s number has already been removed from server`
+            )
+            setTimeout(() => {
+              setMessage(null)
+            }, 5000)
+          })
         }
     } else {
       personService
@@ -89,6 +107,7 @@ const App = () => {
   return (
     <div>
       <h2>Phonebook</h2>
+      <Message message={message}/>
       <Filter value={newFilter} handler={handelNewFilter}/>
       <h2>add a new</h2>
       <PersonForm values={personValues} handlers={personHandlers}/>

@@ -1,20 +1,20 @@
 const PhonebookEntry = ({name, number, id, deleteHandler}) => {
   return (
-      <div>
+      <li className="person">
         {name} {number} 
         <button onClick={() => deleteHandler(id)}>delete</button>
-      </div>
+      </li>
     )
   }
   
 
 const Persons = ({persons, deleteHandler}) =>{
   return(
-    <div>
+      <ol>
       {persons.map(person => 
       <PhonebookEntry key={person.id} id={person.id} name={person.name} number={person.number}  deleteHandler={deleteHandler}/>
       )}
-    </div>
+      </ol>
     )
   }
 
