@@ -1,16 +1,18 @@
-const PhonebookEntry = ({name, phone}) => {
-    return (
-      <p>{name} {phone}</p>
+const PhonebookEntry = ({name, number, id, deleteHandler}) => {
+  return (
+      <div>
+        {name} {number} 
+        <button onClick={() => deleteHandler(id)}>delete</button>
+      </div>
     )
   }
   
 
-const Persons = ({persons}) =>{
-  console.log(persons);
+const Persons = ({persons, deleteHandler}) =>{
   return(
     <div>
       {persons.map(person => 
-      <PhonebookEntry key={person.name} name={person.name} phone={person.phone}/>
+      <PhonebookEntry key={person.id} id={person.id} name={person.name} number={person.number}  deleteHandler={deleteHandler}/>
       )}
     </div>
     )
